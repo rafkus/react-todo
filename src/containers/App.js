@@ -11,6 +11,7 @@ import DisplayArea from "../components/DisplayArea";
 class App extends Component {
   state = {
     display: null,
+    toEdit: null,
     todos: [
       {
         title: "todo 1",
@@ -20,7 +21,7 @@ class App extends Component {
       {
         title: "todo 2",
         isDone: false,
-        description: "very long long desc"
+        description: "very long long very long long very long long very long long very long long desc"
       }
     ]
   };
@@ -48,9 +49,14 @@ class App extends Component {
   };
 
   onRemoveButtonClick = title => {
+    if(this.state.display && this.state.display.title === title) {
+        this.setItemToDisplay(null);
+    }
+    
     this.setState({
       todos: this.removeTodo(title)
     });
+
   };
 
   removeTodo = title => {
@@ -60,6 +66,37 @@ class App extends Component {
     });
   };
 
+  onCheckboxClick = (todo) => {
+    this.setState({
+      todos: this.toggleItemStatus(todo)
+    })
+  }
+
+  toggleItemStatus = (todo) => {
+    let updatedTodos = [...this.state.todos];
+    updatedTodos.filter((item) => {
+      return item.title === todo.title
+    }).map((item) => {
+      return item.isDone = !todo.isDone;
+    })
+    return updatedTodos;
+  }
+  
+
+  onEditButtonClick = (todo) => {
+    this.setItemToEdit(todo);
+  };
+
+  setItemToEdit = (todo) => {
+    this.setState({
+      toEdit: todo
+    })
+  }
+  
+  onUpdateButtonClick = () => {
+    // todo - find todo by title and give it new body from form
+  };
+
   render() {
     return (
       <div>
@@ -67,9 +104,15 @@ class App extends Component {
           todos={this.state.todos}
           onItemDescriptionClick={this.onItemDescriptionClick}
           onRemoveButtonClick={this.onRemoveButtonClick}
+          onEditButtonClick={this.onEditButtonClick}
+          onCheckboxClick={this.onCheckboxClick}
         />
         <DisplayArea todo={this.state.display} />
-        <AddTodoItem add={this.onAddButtonClick} />
+        <AddTodoItem
+          onAddButtonClick={this.onAddButtonClick}
+          onUpdateButtonClick={this.onUpdateButtonClick}
+          toEdit={this.state.toEdit}
+        />
       </div>
     );
   }

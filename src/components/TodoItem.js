@@ -2,25 +2,35 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const TodoItem = props => {
-  let description = props.description;
+  let description = props.item.description;
   if (description.length > 10) {
     description = description.substring(0, 12).concat("...");
   }
 
   return (
     <div>
-      <div onClick={props.onDescriptionClick}>
-        <p>{props.title}</p>
+      <div onClick={() => props.onDescriptionClick(props.item)}>
+        <p>{props.item.title}</p>
         <p>{description}</p>
       </div>
-      <button onClick={props.onRemoveClick}>remove</button>
-      <button>edit</button>
+      <button onClick={() => props.onRemoveClick(props.item.title)}>
+        remove
+      </button>
+      <button onClick={() => {props.onEditClick(props.item)}}>edit</button>
+      <label >
+        <input onChange={() => props.onCheckboxClick(props.item)} type="checkbox" checked={props.item.isDone} />
+        is done
+      </label>
     </div>
   );
 };
 
 TodoItem.propTypes = {
-  title: PropTypes.string.isRequired
+
+  item: PropTypes.shape({
+    title: PropTypes.string
+  }),
+  onDescriptionClick: PropTypes.func.isRequired
 };
 
 export default TodoItem;

@@ -9,10 +9,11 @@ const TodoList = props => {
       return (
         <TodoItem
           key={todoItem.title}
-          title={todoItem.title}
-          description={todoItem.description}
-          onDescriptionClick={() => props.onItemDescriptionClick(todoItem)}
-          onRemoveClick={() => props.onRemoveButtonClick(todoItem.title)}
+          item={todoItem}
+          onDescriptionClick={props.onItemDescriptionClick}
+          onRemoveClick={props.onRemoveButtonClick}
+          onCheckboxClick={props.onCheckboxClick}
+          onEditClick={props.onEditButtonClick}
         />
       );
     });
