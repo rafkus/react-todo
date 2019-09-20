@@ -19,7 +19,10 @@ const TodoList = props => {
     });
   }
 
-  return <div>{todos}</div>;
+  return (<div>
+  <h2>TODO List</h2>
+  {todos}
+  </div>);
 };
 
 export default TodoList;

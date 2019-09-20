@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 const TodoItem = props => {
   let description = props.item.description;
-  if (description.length > 10) {
-    description = description.substring(0, 12).concat("...");
+  if (description.length > 20) {
+    description = description.substring(0, 20).concat("...[click to show]");
   }
 
   return (
