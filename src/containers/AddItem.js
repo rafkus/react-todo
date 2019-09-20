@@ -39,7 +39,7 @@ class AddItem extends Component {
   };
 
 
-  // todo disable submit buttons
+  // todo disable submit buttons - add global isValid and iterate over all elements
   checkValidity = element => {
     let isValid = true;
     const rules = element.validation;
