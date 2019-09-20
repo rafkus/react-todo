@@ -5,14 +5,14 @@ class AddTodoItem extends Component {
   state = {
     form: {
       title: "",
-      description: ""
+      description: "",
     },
     editing: null
   };
 
   componentDidUpdate() {
     if (this.props.toEdit) {
-      if (this.state.editing != this.props.toEdit) {
+      if (this.state.editing !== this.props.toEdit) {
         this.setState({
           form: {
             title: this.props.toEdit.title,
@@ -43,7 +43,8 @@ class AddTodoItem extends Component {
   createTodo() {
     return {
       title: this.state.form.title,
-      description: this.state.form.description
+      description: this.state.form.description,
+      isDone: false
     };
   }
 
@@ -59,6 +60,9 @@ class AddTodoItem extends Component {
 
   onUpdateClick = ev => {
     ev.preventDefault();
+    const newItem = this.createTodo();
+    const oldItem = this.props.toEdit;
+    this.props.onUpdateButtonClick(oldItem, newItem);
     this.resetForm();
     // todo why is not resetting form? because to edit is still set in App?
   };

@@ -93,9 +93,23 @@ class App extends Component {
     })
   }
   
-  onUpdateButtonClick = () => {
-    // todo - find todo by title and give it new body from form
+  onUpdateButtonClick = (oldItem, newItem) => {
+    this.setState({
+      todos: this.updateItem(oldItem, newItem),
+      toEdit: null
+    })
   };
+
+  updateItem = (oldItem, newItem) => {
+    let updatedTodos = [...this.state.todos];
+    updatedTodos.filter((item) => {
+      return item.title === oldItem.title
+    }).map((item) => {
+      item.title = newItem.title;
+      item.description = newItem.description;
+    })
+    return updatedTodos;  
+  }
 
   render() {
     return (
