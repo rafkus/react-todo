@@ -7,4 +7,4 @@
 
 TODO:
 - check if whole form is valid to disable buttons. 
--- solution: iterate over all addForm set isValid = true if all addForm[key].valid are true
+  - solution: iterate over all addForm set isValid = true if all addForm[key].valid are true
